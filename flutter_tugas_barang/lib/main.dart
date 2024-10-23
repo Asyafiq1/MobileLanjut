@@ -13,32 +13,28 @@ class ProductForm extends StatefulWidget {
 
 class _ProductFormState extends State<ProductForm> {
   final _formKey = GlobalKey<FormState>();
-  
+
   // Controllers for the form inputs
   final _kodeController = TextEditingController();
   final _namaController = TextEditingController();
   final _hargaController = TextEditingController();
   final _jumlahController = TextEditingController();
   final _diskonController = TextEditingController();
-  final _totalController = TextEditingController();
 
   double _totalDiskon = 0;
   double _totalBayar = 0;
-  double _total = 0;
 
   void _prosesTransaksi() {
     if (_formKey.currentState!.validate()) {
       final double harga = double.parse(_hargaController.text);
       final int jumlah = int.parse(_jumlahController.text);
       final double diskon = double.parse(_diskonController.text);
-      final double total = double.parse(_totalController.text);
 
       // Menghitung total diskon dan total bayar
       _totalDiskon = (harga * jumlah) * (diskon / 100);
       _totalBayar = (harga * jumlah) - _totalDiskon;
-      _total = (harga*jumlah);
 
-      setState(() {});
+      setState(() {}); // Perbarui UI dengan hasil perhitungan
     }
   }
 
@@ -154,11 +150,11 @@ class _ProductFormState extends State<ProductForm> {
               SizedBox(height: 20),
               // Menampilkan hasil perhitungan
               Text(
-                'Total Diskon: Rp {_totalDiskon.toStringAsFixed(2)}',
+                'Total Diskon: Rp ${_totalDiskon.toStringAsFixed(2)}',
                 style: TextStyle(fontSize: 18),
               ),
               Text(
-                'Total Bayar: Rp {_totalBayar.toStringAsFixed(2)}',
+                'Total Bayar: Rp ${_totalBayar.toStringAsFixed(2)}',
                 style: TextStyle(fontSize: 18),
               ),
             ],
